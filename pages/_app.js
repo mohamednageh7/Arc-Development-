@@ -7,7 +7,7 @@ import Theme from '../src/ui/Theme';
 import Header from '../src/ui/Header';
 import Footer from '../src/ui/Footer';
 
-ReactGA.initialize('G-LLJBVVFBVT');
+ReactGA.initialize('G-0Y4QG1LWSM');
 
 export default function MyApp(props) {
   const [value, setValue] = useState(0);
