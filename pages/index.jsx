@@ -166,7 +166,6 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
               <Grid item>
                 <Button
                   component={Link}
-                  style={{ textDecoration: 'none' }}
                   onClick={() => {
                     setValue(5);
                     ReactGA.event({
@@ -185,7 +184,6 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
                 <Button
                   variant='outlined'
                   component={Link}
-                  style={{ textDecoration: 'none' }}
                   onClick={() => setValue(2)}
                   href='/revolution'
                   className={classes.LearnButtonHero}
@@ -233,7 +231,6 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
             <Button
               variant='outlined'
               component={Link}
-              style={{ textDecoration: 'none' }}
               onClick={() => {
                 setValue(1);
                 setSelectedIndex(1);
@@ -289,7 +286,6 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
                 setValue(1);
                 setSelectedIndex(2);
               }}
-              style={{ textDecoration: 'none' }}
               href='/mobileapps'
               variant='outlined'
               className={classes.learnButton}
@@ -341,7 +337,6 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
                 setValue(1);
                 setSelectedIndex(3);
               }}
-              style={{ textDecoration: 'none' }}
               href='/websites'
               variant='outlined'
               className={classes.learnButton}
@@ -391,7 +386,6 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
                   </Typography>
                   <Button
                     component={Link}
-                    style={{ textDecoration: 'none' }}
                     onClick={() => setValue(2)}
                     href='/revolution'
                     variant='outlined'
@@ -453,7 +447,6 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
                     style={{
                       color: '#fff',
                       borderColor: '#fff',
-                      textDecoration: 'none',
                     }}
                     className={classes.learnButton}
                   >
@@ -491,7 +484,6 @@ const LandingPage = ({ setValue, setSelectedIndex }) => {
                     style={{
                       color: '#fff',
                       borderColor: '#fff',
-                      textDecoration: 'none',
                     }}
                     className={classes.learnButton}
                   >

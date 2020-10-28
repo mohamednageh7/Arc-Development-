@@ -73,7 +73,7 @@ const Services = ({ setValue, setSelectedIndex }) => {
         <Typography
           align={matchesSM ? 'center' : undefined}
           variant='h1'
-          gutterButton
+          gutterBottom
         >
           Services
         </Typography>
@@ -109,7 +109,6 @@ const Services = ({ setValue, setSelectedIndex }) => {
                 setValue(1);
                 setSelectedIndex(2);
               }}
-              style={{ textDecoration: 'none' }}
               href='/mobileapps'
               variant='outlined'
               className={classes.learnButton}
@@ -164,7 +163,6 @@ const Services = ({ setValue, setSelectedIndex }) => {
                 setValue(1);
                 setSelectedIndex(1);
               }}
-              style={{ textDecoration: 'none' }}
               href='/customesoftware'
               className={classes.learnButton}
             >
@@ -217,7 +215,6 @@ const Services = ({ setValue, setSelectedIndex }) => {
                 setValue(1);
                 setSelectedIndex(3);
               }}
-              style={{ textDecoration: 'none' }}
               href='/websites'
               variant='outlined'
               className={classes.learnButton}

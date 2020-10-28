@@ -10,6 +10,11 @@ import Button from '@material-ui/core/Button';
 import Link from '../Link';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+import MenuList from '@material-ui/core/MenuList';
 
 import { useTheme } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -20,6 +25,11 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Hidden from '@material-ui/core/Hidden';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import Grid from '@material-ui/core/Grid';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // for smooth scroll up
 const ElevationScroll = (props) => {
@@ -86,6 +96,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.blue,
     color: '#fff',
     borderRadius: 0,
+    zIndex: 1302,
   },
   menuItem: {
     ...theme.typography.tab,
@@ -123,10 +134,32 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     zIndex: theme.zIndex.modal + 1,
   },
+  expanison: {
+    backgroundColor: theme.palette.common.blue,
+    borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
+    '&.Mui-expanded': {
+      margin: 0,
+      borderBottom: 'none',
+    },
+    '&::before': {
+      backgroundColor: 'rgba(0,0,0,0)',
+    },
+  },
+  expanisonDetails: {
+    padding: 0,
+    backgroundColor: theme.palette.primary.light,
+  },
+  expansionSummary: {
+    padding: '0 24px 0 16px',
+    '&:hover': {
+      backgroundColor: 'rgba(0,0,0,0.08)',
+    },
+    backgroundColor: (value) => (value === 1 ? 'rgba(0,0,0,0.14)' : 'inherit'),
+  },
 }));
 
 const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
-  const classes = useStyles();
+  const classes = useStyles(value);
 
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
@@ -156,6 +189,13 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
     setAnchorEl(null);
     setOpenMenu(false);
   };
+
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    }
+  }
   const tab = [
     {
       to: '/',
@@ -189,27 +229,21 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
 
   const subMenu = [
     {
-      to: '/services',
-      text: 'Services',
-      selectedIndex: 0,
-      val: 1,
-    },
-    {
       to: '/customesoftware',
       text: 'Custome software Development',
-      selectedIndex: 1,
+      selectedIndex: 0,
       val: 1,
     },
     {
       to: '/mobileapps',
       text: 'IOS/Android apps Development',
-      selectedIndex: 2,
+      selectedIndex: 1,
       val: 1,
     },
     {
       to: '/websites',
       text: 'websites Development',
-      selectedIndex: 3,
+      selectedIndex: 2,
       val: 1,
     },
   ];
@@ -253,9 +287,9 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
             aria-owns={singleTab.ariaOwns}
             aria-haspopup={singleTab.ariaHasPopup}
             onMouseOver={singleTab.mouseOver}
+            onMouseLeave={() => setOpenMenu(false)}
             className={classes.tab}
             component={Link}
-            style={{ textDecoration: 'none' }}
             href={singleTab.to}
             label={singleTab.label}
           />
@@ -271,41 +305,64 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
           });
         }}
         color='secondary'
-        style={{ textDecoration: 'none' }}
         component={Link}
         href='/estimate'
         className={classes.button}
       >
         Free Estimate
       </Button>
-      <Menu
-        id='simple-menu'
-        anchorEl={anchorEl}
+
+      <Popper
         open={openMenu}
-        onClose={handleClose}
-        MenuListProps={{ onMouseLeave: handleClose }}
-        classes={{ paper: classes.menu }}
-        elevation={0}
-        style={{ zIndex: 1302 }}
-        keepMounted
+        anchorEl={anchorEl}
+        role={undefined}
+        transition
+        disablePortal
+        placement='bottom-start'
       >
-        {subMenu.map((singleTab, i) => (
-          <MenuItem
-            key={`${singleTab}${i}Sub`}
-            onClick={(e) => {
-              handleMenuItemClick(e, i);
-              setValue(1);
-              handleClose();
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            style={{
+              transformOrigin: 'top left',
             }}
-            component={Link}
-            href={singleTab.to}
-            classes={{ root: classes.menuItem }}
-            selected={i === selectedIndex && value === 1}
           >
-            {singleTab.text}
-          </MenuItem>
-        ))}
-      </Menu>
+            <Paper classes={{ root: classes.menu }} elevation={0}>
+              <ClickAwayListener onClickAway={handleClose}>
+                <MenuList
+                  onMouseLeave={handleClose}
+                  disablePadding
+                  onMouseOver={() => setOpenMenu(true)}
+                  autoFocusItem={false}
+                  id='simple-menu'
+                  onKeyDown={handleListKeyDown}
+                >
+                  {subMenu.map((singleTab, i) => (
+                    <MenuItem
+                      key={`${singleTab}${i}Sub`}
+                      onClick={(e) => {
+                        handleMenuItemClick(e, i);
+                        setValue(1);
+                        handleClose();
+                      }}
+                      component={Link}
+                      href={singleTab.to}
+                      classes={{ root: classes.menuItem }}
+                      selected={
+                        i === selectedIndex &&
+                        value === 1 &&
+                        window.location.pathname !== '/services'
+                      }
+                    >
+                      {singleTab.text}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
     </Fragment>
   );
   const drawer = (
@@ -322,25 +379,91 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
       >
         <div className={classes.toolbarMargin} />
         <List disablePadding>
-          {tab.map((singleTab, i) => (
-            <ListItem
-              divider
-              button
-              onClick={() => {
-                setOpenDrawer(false);
-                setValue(singleTab.val);
-              }}
-              selected={value === singleTab.val}
-              classes={{ selected: classes.drawerItemSelected }}
-              key={`${singleTab}${i}drawer`}
-              component={Link}
-              href={singleTab.to}
-            >
-              <ListItemText className={classes.drawerItem} disableTypography>
-                {singleTab.label}
-              </ListItemText>
-            </ListItem>
-          ))}
+          {tab.map((singleTab, i) =>
+            singleTab.label === 'Services' ? (
+              <Accordion
+                elevation={0}
+                key={`${singleTab.label}${i}drawer`}
+                classes={{ root: classes.expanison }}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon color='secondary' />}
+                  classes={{ root: classes.expansionSummary }}
+                >
+                  <ListItemText
+                    style={{ opacity: value === 1 ? 1 : null }}
+                    className={classes.drawerItem}
+                    disableTypography
+                    onClick={() => {
+                      setOpenDrawer(false);
+                      setValue(singleTab.val);
+                    }}
+                  >
+                    <Link href={singleTab.to} color='inherit'>
+                      {singleTab.label}
+                    </Link>
+                  </ListItemText>
+                </AccordionSummary>
+                <AccordionDetails classes={{ root: classes.expanisonDetails }}>
+                  <Grid container direction='column'>
+                    {subMenu.map((route) => (
+                      <Grid item>
+                        <ListItem
+                          divider
+                          button
+                          onClick={() => {
+                            setOpenDrawer(false);
+                            setSelectedIndex(route.selectedIndex);
+                          }}
+                          selected={
+                            selectedIndex === route.selectedIndex &&
+                            value === 1 &&
+                            window.location.pathname !== '/services'
+                          }
+                          classes={{ selected: classes.drawerItemSelected }}
+                          key={`${route.label}${route.selectedIndex}drawer`}
+                          component={Link}
+                          href={route.to}
+                        >
+                          <ListItemText
+                            className={classes.drawerItem}
+                            disableTypography
+                          >
+                            {route.text
+                              .split(' ')
+                              .filter((word) => word !== 'Development')
+                              .join(' ')}
+                            <br />
+                            <span style={{ fontSize: '0.75rem' }}>
+                              Development
+                            </span>
+                          </ListItemText>
+                        </ListItem>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </AccordionDetails>
+              </Accordion>
+            ) : (
+              <ListItem
+                divider
+                button
+                onClick={() => {
+                  setOpenDrawer(false);
+                  setValue(singleTab.val);
+                }}
+                selected={value === singleTab.val}
+                classes={{ selected: classes.drawerItemSelected }}
+                key={`${singleTab}${i}drawer`}
+                component={Link}
+                href={singleTab.to}
+              >
+                <ListItemText className={classes.drawerItem} disableTypography>
+                  {singleTab.label}
+                </ListItemText>
+              </ListItem>
+            )
+          )}
           <ListItem
             classes={{
               root: classes.drawerItemEstimate,
@@ -385,7 +508,6 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
               href='/'
               disableRipple
               className={classes.logoContainer}
-              style={{ textDecoration: 'none' }}
               onClick={() => setValue(0)}
             >
               <svg

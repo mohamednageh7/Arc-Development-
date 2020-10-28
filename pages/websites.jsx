@@ -67,7 +67,7 @@ const Websites = ({ setSelectedIndex, setValue }) => {
             style={{ marginRight: '1em', marginLeft: '-3.5em' }}
           >
             <IconButton
-              style={{ backgroundColor: 'transparent', textDecoration: 'none' }}
+              style={{ backgroundColor: 'transparent' }}
               component={Link}
               href='/mobileapps'
               onClick={() => setSelectedIndex(2)}
@@ -109,7 +109,7 @@ const Websites = ({ setSelectedIndex, setValue }) => {
         <Hidden mdDown>
           <Grid item className={classes.arrowContainer}>
             <IconButton
-              style={{ backgroundColor: 'transparent', textDecoration: 'none' }}
+              style={{ backgroundColor: 'transparent' }}
               component={Link}
               href='/services'
               onClick={() => setSelectedIndex(0)}

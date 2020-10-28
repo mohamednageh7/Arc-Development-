@@ -109,7 +109,7 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
             style={{ marginRight: '1em', marginLeft: '-3.5em' }}
           >
             <IconButton
-              style={{ backgroundColor: 'transparent', textDecoration: 'none' }}
+              style={{ backgroundColor: 'transparent' }}
               component={Link}
               href='/services'
               onClick={() => setSelectedIndex(0)}
@@ -167,7 +167,7 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
         <Hidden mdDown>
           <Grid item className={classes.arrowContainer}>
             <IconButton
-              style={{ backgroundColor: 'transparent', textDecoration: 'none' }}
+              style={{ backgroundColor: 'transparent' }}
               component={Link}
               href='/mobileapps'
               onClick={() => setSelectedIndex(2)}
@@ -312,7 +312,7 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
           direction={matchesMD ? 'column' : 'row'}
           md
         >
-          <Grid item md>
+          <Grid item md style={{ marginBottom: matchesSM ? '2em' : null }}>
             <Lottie
               options={scaleOptions}
               style={{ maxHeight: 260, maxWidth: 280 }}
@@ -426,7 +426,7 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
             </Grid>
           </Grid>
           {/* User Experience design container */}
-          <Grid item md>
+          <Grid item md style={{ marginTop: matchesSM ? '2em' : null }}>
             <Lottie
               options={automationOptions}
               isStopped={true}
@@ -442,7 +442,7 @@ const CustomSoftware = ({ setValue, setSelectedIndex }) => {
           direction={matchesMD ? 'column' : 'row'}
           md
         >
-          <Grid item md>
+          <Grid item md style={{ marginBottom: matchesSM ? '2em' : null }}>
             <Lottie
               options={uxOptions}
               isStopped={true}

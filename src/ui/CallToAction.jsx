@@ -70,11 +70,19 @@ const CallToAction = ({ setValue }) => {
       >
         <Grid container direction='column'>
           <Grid item>
-            <Typography variant='h1'>
+            <Typography
+              variant='h1'
+              gutterBottom
+              style={{ lineHeight: matchesSM ? 1.1 : null }}
+            >
               Simple Software <br />
+              {matchesSM && <br />}
               Revolutionary Result
             </Typography>
-            <Typography variant='subtitle2' style={{ fontSize: '1.25rem' }}>
+            <Typography
+              variant='subtitle2'
+              style={{ fontSize: matchesSM ? '1.25rem' : '1.5rem' }}
+            >
               Take Advantage of 12st century
             </Typography>
             <Grid container item justify={matchesSM ? 'center' : undefined}>
@@ -101,7 +109,6 @@ const CallToAction = ({ setValue }) => {
       <Grid item>
         <Button
           component={Link}
-          style={{ textDecoration: 'none' }}
           href='/estimate'
           onClick={() => {
             setValue(5);

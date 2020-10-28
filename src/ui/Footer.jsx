@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Arial',
     fontSize: '0.75rem',
     fontWight: 'bold',
-    textDecoration: 'none',
   },
   gridItem: {
     margin: '3em',
@@ -121,7 +120,6 @@ const Footer = ({ setValue, setSelectedIndex }) => {
                     className={classes.link}
                     component={Link}
                     href={link.to}
-                    style={{ textDecoration: 'none' }}
                     onClick={(e) => {
                       setValue(link.index);
                       setSelectedIndex(link.selectedIndex);
@@ -152,7 +150,6 @@ const Footer = ({ setValue, setSelectedIndex }) => {
             key={icon.name}
             component={'a'}
             href={icon.link}
-            style={{ textDecoration: 'none' }}
             rel='noopener noreferrer'
             target='_blank'
           >

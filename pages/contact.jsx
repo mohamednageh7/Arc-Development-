@@ -509,7 +509,6 @@ const ContactUs = ({ setValue }) => {
               <Grid container item justify={matchesMD ? 'center' : undefined}>
                 <Button
                   component={Link}
-                  style={{ textDecoration: 'none' }}
                   href='/revolution'
                   onClick={() => setValue(2)}
                   variant='outlined'
@@ -530,7 +529,6 @@ const ContactUs = ({ setValue }) => {
         <Grid item>
           <Button
             component={Link}
-            style={{ textDecoration: 'none' }}
             href='/estimate'
             onClick={() => {
               setValue(5);

@@ -80,7 +80,6 @@ const MobileApps = ({ setSelectedIndex, setValue }) => {
             <IconButton
               style={{ backgroundColor: 'transparent' }}
               component={Link}
-              style={{ textDecoration: 'none' }}
               href='/customesoftware'
               onClick={() => setSelectedIndex(1)}
             >
@@ -128,7 +127,7 @@ const MobileApps = ({ setSelectedIndex, setValue }) => {
         <Hidden mdDown>
           <Grid item className={classes.arrowContainer}>
             <IconButton
-              style={{ backgroundColor: 'transparent', textDecoration: 'none' }}
+              style={{ backgroundColor: 'transparent' }}
               component={Link}
               href='/websites'
               onClick={() => setSelectedIndex(3)}
