@@ -179,7 +179,7 @@ const Services = ({ setValue, setSelectedIndex }) => {
             <img
               className={classes.icon}
               alt='custome software icon'
-              src='/assets/customsoftware.svg'
+              src='/assets/customSoftware.svg'
             />
           </Grid>
         </Grid>
